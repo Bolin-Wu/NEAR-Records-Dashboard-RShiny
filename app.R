@@ -5,37 +5,79 @@ library("readxl")
 
 # read data ---------------------------------------------------------------
 
-data <-  read_excel("data/Troubleshooting_database.xlsx",sheet = "record", guess_max = 21474836)
+data_dbpart <- read_excel("data/Troubleshooting_database.xlsx", sheet = "record", guess_max = 21474836)
+data_harmopart <- read_excel("data/Troubleshooting_harmonization.xlsx", sheet = "record", guess_max = 21474836)
 # tbs_harmonization <- read_docx("data/Troubleshooting_harmonization.docx")
 
 
 # Define UI
 ui <- fluidPage(
   titlePanel("NEAR troubleshooting records"),
-  fluidRow( 
-    column(
-      width = 12,
-      selectInput("database", "Select Database:", choices = unique(data$Database))
+  # Define tabs
+  tabsetPanel(
+    tabPanel(
+      "Database",
+      fluidRow(
+        column(
+          width = 12,
+          h4("Instruction:"),
+          p("Use this tab when you meet problem at the metadata collection phrase. For example, if you want to double check if a vaiable is available or not but Maelstrom and codebooks are not sufficient."),
+          br()
+        )
+      ),
+      # verbatimTextOutput("database_info"),
+      fluidRow(
+        column(
+          width = 6,
+          selectInput("database", "Select Database:", choices = unique(data_dbpart$Database))
+        ),
+        column(
+          width = 6,
+          textInput("variable", "Search Variable:", placeholder = "Type to search...")
+        )
+      ),
+      column(
+        width = 12,
+        DTOutput("dbpart_table")
+      )
     ),
-    column(
-      width = 12,
-      textInput("variable", "Search Variable:", placeholder = "Type to search...")
+    tabPanel(
+      "Harmoniaztion",
+      fluidRow(
+        column(
+          width = 12,
+          h4("Instruction:"),
+          p("Refer to this tab when you meet problem at the data harmonization phrase. For example, after you received the variables from DBMs, there are unexpected categories/missings or formats."),
+          br()
+        )
+      ),
+      fluidRow(
+        column(
+          width = 6,
+          selectInput("database_harmo", "Select Database:", choices = unique(data_harmopart$Database))
+        ),
+        column(
+          width = 6,
+          textInput("variable_harmo", "Search Variable:", placeholder = "Type to search...")
+        ),
+        column(
+          width = 12,
+          DTOutput("harmopart_table")
+        )
+      )
     )
-  ),
-  column(
-    width = 12,
-    DTOutput("description_table")
   )
 )
 
 # Define server logic
 server <- function(input, output, session) {
+
   # Reactive expression to filter data based on database and variable search
-  filtered_data <- reactive({
+  filtered_data_dbpart <- reactive({
     req(input$database)
 
     # Filter by database
-    filtered <- data %>%
+    filtered <- data_dbpart %>%
       filter(Database == input$database)
 
     # If variable search is not empty, filter by variable
@@ -47,9 +89,40 @@ server <- function(input, output, session) {
     return(filtered)
   })
 
-  # Render description table
-  output$description_table <- renderDT({
-    filtered_data <- filtered_data()
+  ## filter harmonization
+  filtered_data_harmopart <- reactive({
+    req(input$database)
+
+    # Filter by database
+    filtered <- data_harmopart %>%
+      filter(Database == input$database_harmo)
+
+    # If variable search is not empty, filter by variable
+    if (input$variable_harmo != "") {
+      filtered <- filtered %>%
+        filter(str_detect(tolower(Variable), tolower(input$variable_harmo)))
+    }
+
+    return(filtered)
+  })
+
+  # Render database part
+  output$dbpart_table <- renderDT({
+    filtered_data_dbpart <- filtered_data_dbpart()
+
+    # If no records found, return an empty data table
+    if (nrow(filtered_data_dbpart) == 0) {
+      return(data.frame()) # Return empty data frame
+    }
+
+    # Display all descriptions and sources if no variable search is made
+    datatable(filtered_data_dbpart[, c("Variable", "Description", "Source")],
+      options = list(dom = "t", paging = TRUE, ordering = TRUE), escape = FALSE
+    )
+  })
+  # Render harmonization part
+  output$harmopart_table <- renderDT({
+    filtered_data <- filtered_data_harmopart()
 
     # If no records found, return an empty data table
     if (nrow(filtered_data) == 0) {
@@ -57,7 +130,7 @@ server <- function(input, output, session) {
     }
 
     # Display all descriptions and sources if no variable search is made
-    datatable(filtered_data[, c("Variable", "Description", "Source")],
+    datatable(filtered_data %>% select(-1),
       options = list(dom = "t", paging = TRUE, ordering = TRUE), escape = FALSE
     )
   })
