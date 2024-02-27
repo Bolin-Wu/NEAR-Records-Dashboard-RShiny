@@ -2,6 +2,9 @@ library("here")
 library("DT")
 library("tidyverse")
 library("readxl")
+library("bslib")
+library("shiny")
+library("shinythemes")
 
 # read data ---------------------------------------------------------------
 
@@ -12,7 +15,14 @@ data_harmopart <- read_excel("data/Troubleshooting_harmonization.xlsx", sheet = 
 
 # Define UI
 ui <- fluidPage(
-  titlePanel("NEAR troubleshooting records"),
+  theme = shinytheme("flatly"),
+  titlePanel(
+    div(
+      img(src = "https://www.near-aging.se/wp-content/uploads/2018/09/near-logo-1.png", height = 60),  # Add your logo here
+      "Troubleshooting Records", 
+      style = "display: flex; align-items: center;"
+    )
+  ),
   # Define tabs
   tabsetPanel(
     tabPanel(
@@ -47,7 +57,7 @@ ui <- fluidPage(
         column(
           width = 12,
           h4("Instruction:"),
-          p("Refer to this tab when you meet problem at the data harmonization phrase. For example, after you received the variables from DBMs, there are unexpected categories/missings or formats."),
+          p("Refer to this tab after you received variables and meet problem at the harmonization phrase. For example, variables have unexpected categories/missings or formats."),
           br()
         )
       ),
@@ -71,67 +81,67 @@ ui <- fluidPage(
 
 # Define server logic
 server <- function(input, output, session) {
-
+  
   # Reactive expression to filter data based on database and variable search
   filtered_data_dbpart <- reactive({
     req(input$database)
-
+    
     # Filter by database
     filtered <- data_dbpart %>%
       filter(Database == input$database)
-
+    
     # If variable search is not empty, filter by variable
     if (input$variable != "") {
       filtered <- filtered %>%
         filter(str_detect(tolower(Variable), tolower(input$variable)))
     }
-
+    
     return(filtered)
   })
-
+  
   ## filter harmonization
   filtered_data_harmopart <- reactive({
     req(input$database)
-
+    
     # Filter by database
     filtered <- data_harmopart %>%
       filter(Database == input$database_harmo)
-
+    
     # If variable search is not empty, filter by variable
     if (input$variable_harmo != "") {
       filtered <- filtered %>%
         filter(str_detect(tolower(Variable), tolower(input$variable_harmo)))
     }
-
+    
     return(filtered)
   })
-
+  
   # Render database part
   output$dbpart_table <- renderDT({
     filtered_data_dbpart <- filtered_data_dbpart()
-
+    
     # If no records found, return an empty data table
     if (nrow(filtered_data_dbpart) == 0) {
       return(data.frame()) # Return empty data frame
     }
-
+    
     # Display all descriptions and sources if no variable search is made
     datatable(filtered_data_dbpart[, c("Variable", "Description", "Source")],
-      options = list(dom = "t", paging = TRUE, ordering = TRUE), escape = FALSE
+              options = list(dom = "t", paging = TRUE, ordering = TRUE), escape = FALSE
     )
   })
   # Render harmonization part
   output$harmopart_table <- renderDT({
     filtered_data <- filtered_data_harmopart()
-
+    
     # If no records found, return an empty data table
     if (nrow(filtered_data) == 0) {
       return(data.frame()) # Return empty data frame
     }
-
+    
     # Display all descriptions and sources if no variable search is made
     datatable(filtered_data %>% select(-1),
-      options = list(dom = "t", paging = TRUE, ordering = TRUE), escape = FALSE
+              options = list(dom = "t", paging = TRUE, ordering = TRUE), escape = FALSE
     )
   })
 }
