@@ -18,7 +18,7 @@ ui <- fluidPage(
   theme = shinytheme("flatly"),
   titlePanel(
     div(
-      img(src = "https://www.near-aging.se/wp-content/uploads/2018/09/near-logo-1.png", height = 60, style = "margin-right: 10px;"),  # Add your logo here
+      img(src = "https://www.near-aging.se/wp-content/uploads/2018/09/near-logo-1.png", height = 60, style = "margin-right: 10px;"),  
       " Troubleshooting Records", 
       style = "display: flex; align-items: center;"
     )
