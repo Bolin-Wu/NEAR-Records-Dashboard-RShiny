@@ -18,8 +18,8 @@ ui <- fluidPage(
   theme = shinytheme("flatly"),
   titlePanel(
     div(
-      img(src = "https://www.near-aging.se/wp-content/uploads/2018/09/near-logo-1.png", height = 60),  # Add your logo here
-      "Troubleshooting Records", 
+      img(src = "https://www.near-aging.se/wp-content/uploads/2018/09/near-logo-1.png", height = 60, style = "margin-right: 10px;"),  # Add your logo here
+      " Troubleshooting Records", 
       style = "display: flex; align-items: center;"
     )
   ),
@@ -31,7 +31,7 @@ ui <- fluidPage(
         column(
           width = 12,
           h4("Instruction:"),
-          p("Use this tab when you meet problem at the metadata collection phrase. For example, if you want to double check if a vaiable is available or not but Maelstrom and codebooks are not sufficient."),
+          p("Use this tab when you meet problem at the metadata collection phrase. For example, you are communicating with researchers and you want to check if a vaiable is available, but Maelstrom and codebooks are not sufficient."),
           br()
         )
       ),
