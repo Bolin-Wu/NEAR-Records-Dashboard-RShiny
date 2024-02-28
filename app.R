@@ -18,9 +18,11 @@ data_harmopart <- read_excel("data/Troubleshooting_harmonization.xlsx", sheet = 
 
 # Define UI
 ui <- fluidPage(
+  title = "NEAR Troubleshooting Records",
   theme = shinytheme("flatly"),
   titlePanel(
     div(
+      style = "display: flex; align-items: center;",
       img(src = "https://www.near-aging.se/wp-content/uploads/2018/09/near-logo-1.png", height = 60, style = "margin-right: 10px;"),
       " Troubleshooting Records",
       style = "display: flex; align-items: center;"
