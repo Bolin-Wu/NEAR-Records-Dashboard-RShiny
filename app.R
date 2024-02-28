@@ -15,7 +15,8 @@ data_dbpart <- read_excel("data/Troubleshooting_database.xlsx", sheet = "record"
 data_harmopart <- read_excel("data/Troubleshooting_harmonization.xlsx", sheet = "record", guess_max = 21474836)
 # tbs_harmonization <- read_docx("data/Troubleshooting_harmonization.docx")
 
-
+# Get the current date
+last_update_date <- Sys.Date()
 # Define UI
 ui <- fluidPage(
   title = "NEAR Troubleshooting Records",
@@ -40,7 +41,8 @@ ui <- fluidPage(
         column(
           width = 12,
           br(),
-          plotOutput("database_plot")
+          plotOutput("database_plot"),
+          p("Last update: ",last_update_date)
         )
       )
     ),
