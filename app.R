@@ -5,6 +5,7 @@ library("readxl")
 library("bslib")
 library("shiny")
 library("shinythemes")
+library("markdown")
 
 # read data ---------------------------------------------------------------
 
@@ -30,9 +31,7 @@ ui <- fluidPage(
       fluidRow(
         column(
           width = 12,
-          h4("Instruction:"),
-          p("Use this tab when you meet problem at the metadata collection phrase. For example, you are communicating with researchers and you want to check if a vaiable is available, but Maelstrom and codebooks are not sufficient."),
-          br()
+          includeMarkdown("text/database_tab.md")
         )
       ),
       # verbatimTextOutput("database_info"),
@@ -56,9 +55,7 @@ ui <- fluidPage(
       fluidRow(
         column(
           width = 12,
-          h4("Instruction:"),
-          p("Refer to this tab after you received variables and meet problem at the harmonization phrase. For example, variables have unexpected categories/missings or formats."),
-          br()
+          includeMarkdown("text/harmonization_tab.md")
         )
       ),
       fluidRow(
@@ -73,6 +70,15 @@ ui <- fluidPage(
         column(
           width = 12,
           DTOutput("harmopart_table")
+        )
+      )
+    ),
+    tabPanel(
+      "About",
+      fluidRow(
+        column(
+          width = 12,
+          includeMarkdown("text/about.md")
         )
       )
     )
