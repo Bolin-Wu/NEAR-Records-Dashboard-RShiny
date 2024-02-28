@@ -799,6 +799,18 @@
       ],
       "Hash": "0080607b4a1a7b28979aecef976d8bc2"
     },
+    "joycon": {
+      "Package": "joycon",
+      "Version": "1.0.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "jrcalabrese",
+      "RemoteRepo": "joycon",
+      "RemoteRef": "main",
+      "RemoteSha": "7de1315e1a3452bdad194e70406ef9a503fc43f2",
+      "Hash": "adc746817b60a000fcda45da4c192dbb"
+    },
     "jquerylib": {
       "Package": "jquerylib",
       "Version": "0.1.4",
@@ -917,6 +929,19 @@
         "R"
       ],
       "Hash": "7ce2733a9826b3aeb1775d56fd305472"
+    },
+    "markdown": {
+      "Package": "markdown",
+      "Version": "1.12",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "commonmark",
+        "utils",
+        "xfun"
+      ],
+      "Hash": "765cf53992401b3b6c297b69e1edb8bd"
     },
     "memoise": {
       "Package": "memoise",

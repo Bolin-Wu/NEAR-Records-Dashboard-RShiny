@@ -1,4 +1,6 @@
-
+library("joycon")
+library("ggplot2")
+library("tidyverse")
 # bar chart at the about tab ----------------------------------------------
 about_plot <- function(data_dbpart, data_harmopart) {
   data_dbpart %>%
