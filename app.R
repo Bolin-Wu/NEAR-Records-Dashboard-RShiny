@@ -42,7 +42,7 @@ ui <- fluidPage(
           width = 12,
           br(),
           plotOutput("database_plot"),
-          p("Last update: ",last_update_date)
+          p("Last update: ", last_update_date)
         )
       )
     ),
@@ -58,7 +58,7 @@ ui <- fluidPage(
       fluidRow(
         column(
           width = 6,
-          selectInput("database", "Select Database:", choices = unique(data_dbpart$Database))
+          selectInput("database", "Select Database:", choices = c("All", unique(data_dbpart$Database)))
         ),
         column(
           width = 6,
@@ -81,7 +81,7 @@ ui <- fluidPage(
       fluidRow(
         column(
           width = 6,
-          selectInput("database_harmo", "Select Database:", choices = unique(data_harmopart$Database))
+          selectInput("database_harmo", "Select Database:", choices = c("All", unique(data_harmopart$Database)))
         ),
         column(
           width = 6,
@@ -104,8 +104,13 @@ server <- function(input, output, session) {
     req(input$database)
 
     # Filter by database
-    filtered <- data_dbpart %>%
-      filter(Database == input$database)
+    if (input$database == "All") {
+      filtered <- data_dbpart
+    } else {
+      filtered <- data_dbpart %>%
+        filter(Database == input$database) %>% 
+        select(-1)
+    }
 
     # If variable search is not empty, filter by variable
     if (input$variable != "") {
@@ -118,11 +123,16 @@ server <- function(input, output, session) {
 
   ## filter harmonization
   filtered_data_harmopart <- reactive({
-    req(input$database)
+    req(input$database_harmo)
 
     # Filter by database
-    filtered <- data_harmopart %>%
-      filter(Database == input$database_harmo)
+    if (input$database_harmo == "All") {
+      filtered <- data_harmopart
+    } else {
+      filtered <- data_harmopart %>%
+        filter(Database == input$database_harmo) %>% 
+        select(-1)
+    }
 
     # If variable search is not empty, filter by variable
     if (input$variable_harmo != "") {
@@ -143,8 +153,8 @@ server <- function(input, output, session) {
     }
 
     # Display all descriptions and sources if no variable search is made
-    datatable(filtered_data_dbpart[, c("Variable", "Description", "Source")],
-      options = list(dom = "t", paging = TRUE, ordering = TRUE), escape = FALSE
+    datatable(filtered_data_dbpart,
+      options = list(searching = FALSE, paging = TRUE, ordering = TRUE), escape = FALSE
     )
   })
   # Render harmonization part
@@ -157,8 +167,8 @@ server <- function(input, output, session) {
     }
 
     # Display all descriptions and sources if no variable search is made
-    datatable(filtered_data %>% select(-1),
-      options = list(dom = "t", paging = TRUE, ordering = TRUE), escape = FALSE
+    datatable(filtered_data,
+      options = list(searching = FALSE, paging = TRUE, ordering = TRUE), escape = FALSE
     )
   })
   # Create bar plot
