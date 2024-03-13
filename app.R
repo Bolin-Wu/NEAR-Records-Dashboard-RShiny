@@ -16,7 +16,7 @@ data_harmopart <- read_excel("data/Troubleshooting_harmonization.xlsx", sheet = 
 # tbs_harmonization <- read_docx("data/Troubleshooting_harmonization.docx")
 
 # Get the current date
-last_update_date <- Sys.Date()
+last_update_date <- "2024-03-10" # Sys.Date()
 # Define UI
 ui <- fluidPage(
   title = "NEAR Troubleshooting Records",
