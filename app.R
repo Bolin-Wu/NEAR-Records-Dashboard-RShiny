@@ -47,7 +47,7 @@ ui <- fluidPage(
         column(
           width = 12,
           br(),
-          p("Some history harmonized variables:", style = "text-align: center; font-weight: bold;"),
+          p("Part of history harmonized variables:", style = "text-align: center; font-weight: bold;"),
           plotOutput("word_cloud"),
           p("Last update: ", last_update_date)
         )
