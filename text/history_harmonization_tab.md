@@ -1,6 +1,6 @@
 #### Instruction
 
-This document keeps track of the variables already harmonized in the history of NEAR projects. It does not specify the variables' waves or categories but provides an overall landscape.
+Here keeps track of the variables already harmonized in the history of NEAR projects. It does not specify the variables' waves or categories but provides an overall landscape.
 
 The goal is to facilitate early metadata collection when starting a new project.
 

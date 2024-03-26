@@ -8,6 +8,7 @@ library("shiny")
 library("joycon")
 library("shinythemes")
 library("markdown")
+library("wordcloud")
 
 # read data ---------------------------------------------------------------
 
@@ -46,7 +47,7 @@ ui <- fluidPage(
         column(
           width = 12,
           br(),
-          tags$p("Part of history harmonized variables", style = "text-align: center; font-weight: bold;"),
+          p("Some history harmonized variables:", style = "text-align: center; font-weight: bold;"),
           plotOutput("word_cloud"),
           p("Last update: ", last_update_date)
         )
@@ -118,7 +119,7 @@ ui <- fluidPage(
         ),
         column(
           width = 6,
-          selectInput("project_history", "Select Project:", choices = unique(data_history$Project))
+          selectInput("project_history", "Select Project:", choices = c("All",unique(data_history$Project)))
         ),
         column(
           width = 12,
@@ -193,16 +194,20 @@ server <- function(input, output, session) {
     }
 
     # filter by project
-    filtered <- filtered %>%
-      filter(Project == input$project_history) %>%
-      select(-Project)
+    if (input$project_history == "All") {
+      filtered <- filtered
+    } else {
+      filtered <- filtered %>%
+        filter(Project == input$project_history) %>%
+        select(-Project)
+    }
 
     # filter by measure
     if (input$measure_select_history == "All") {
       filtered <- filtered
     } else {
       filtered <- filtered %>%
-        filter(Measure == input$measure_select_history) 
+        filter(Measure == input$measure_select_history)
     }
 
     return(filtered)
@@ -248,7 +253,7 @@ server <- function(input, output, session) {
 
     # Display all descriptions and sources if no variable search is made
     datatable(filtered_history_data,
-      options = list(searching = TRUE, paging = TRUE, ordering = TRUE,pageLength = length(unique(data_history$Database))), escape = FALSE
+      options = list(searching = TRUE, paging = TRUE, ordering = TRUE, pageLength = length(unique(data_history$Database))), escape = FALSE
     )
   })
 
@@ -258,8 +263,8 @@ server <- function(input, output, session) {
   output$database_plot <- renderPlot({
     about_plot(data_dbpart, data_harmopart)
   })
-  
-  output$word_cloud<- renderPlot({
+
+  output$word_cloud <- renderPlot({
     word_cloud(data_history_raw)
   })
 }

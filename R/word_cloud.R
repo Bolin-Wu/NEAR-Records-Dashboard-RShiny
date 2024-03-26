@@ -1,11 +1,4 @@
 
-library(wordcloud)
-
-## get the history harmonization file
-source(here("R", "preprocess_harmo_history.R"))
-
-
-
 word_cloud <- function(data_history_raw) {
   data_history_raw = data_history_raw
 
