@@ -119,7 +119,7 @@ ui <- fluidPage(
         ),
         column(
           width = 6,
-          selectInput("project_history", "Select Project:", choices = c("All",sort(unique(data_history$Project))))
+          uiOutput("project_ui")
         ),
         column(
           width = 12,
@@ -133,22 +133,38 @@ ui <- fluidPage(
 
 source("R/plot_code.R")
 source("R/word_cloud.R")
-measures = unique(data_history$Measure)
+measures <- unique(data_history$Measure)
 # Define server logic
 server <- function(input, output, session) {
-  
   # Render Measure select input based on Category selection
   output$measure_ui <- renderUI({
     category <- input$category_history
-    
+
     # If category is All, show all measures, else show measures based on category
     if (category == "All") {
-      selectInput("measure_select_history", "Select Measure", choices = c("All",unique(data_history$Measure)))
+      selectInput("measure_select_history", "Select Measure", choices = c("All", unique(data_history$Measure)))
     } else {
-      selectInput("measure_select_history", "Select Measure", choices = c("All",unique(filter(data_history, Category == category)[["Measure"]])))
+      selectInput("measure_select_history", "Select Measure", choices = c("All", unique(filter(data_history, Category == category)[["Measure"]])))
     }
   })
-  
+
+  # Render Project select input based on Category AND Measure selection
+  output$project_ui <- renderUI({
+    category <- input$category_history
+    measure <- input$measure_select_history
+
+    # If category is All, show all measures, else show measures based on category
+    if (category == "All" & measure == "All") {
+      selectInput("project_history", "Select Project", choices = c("All", unique(data_history$Project)))
+    } else if (category != "All" & measure == "All") {
+      selectInput("project_history", "Select Project", choices = c("All", unique(filter(data_history, Category == category)[["Project"]])))
+    } else if (measure != "All" & category == "All") {
+      selectInput("project_history", "Select Project", choices = c("All", unique(filter(data_history, Measure == measure)[["Project"]])))
+    } else {
+      selectInput("project_history", "Select Project", choices = c("All", unique(filter(data_history, Measure == measure, Category == category)[["Project"]])))
+    }
+  })
+
   # Reactive expression to filter data based on database and variable search
   filtered_data_dbpart <- reactive({
     req(input$database)
