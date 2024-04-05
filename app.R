@@ -65,7 +65,7 @@ ui <- fluidPage(
       fluidRow(
         column(
           width = 6,
-          selectInput("database", "Select Database:", choices = c("All", unique(data_dbpart$Database)))
+          selectInput("database", "Select Database:", choices = c("All", sort(unique(data_dbpart$Database))))
         ),
         column(
           width = 6,
@@ -88,7 +88,7 @@ ui <- fluidPage(
       fluidRow(
         column(
           width = 6,
-          selectInput("database_harmo", "Select Database:", choices = c("All", unique(data_harmopart$Database)))
+          selectInput("database_harmo", "Select Database:", choices = c("All", sort(unique(data_harmopart$Database))))
         ),
         column(
           width = 6,
@@ -111,7 +111,7 @@ ui <- fluidPage(
       fluidRow(
         column(
           width = 6,
-          selectInput("category_history", "Select Category:", choices = c("All", unique(data_history$Category)))
+          selectInput("category_history", "Select Category:", choices = c("All", sort(unique(data_history$Category))))
         ),
         column(
           width = 6,
@@ -155,13 +155,13 @@ server <- function(input, output, session) {
 
     # If category is All, show all measures, else show measures based on category
     if (category == "All" & measure == "All") {
-      selectInput("project_history", "Select Project", choices = c("All", unique(data_history$Project)))
+      selectInput("project_history", "Select Project", choices = c("All", sort(unique(data_history$Project))))
     } else if (category != "All" & measure == "All") {
-      selectInput("project_history", "Select Project", choices = c("All", unique(filter(data_history, Category == category)[["Project"]])))
+      selectInput("project_history", "Select Project", choices = c("All", sort(unique(filter(data_history, Category == category)[["Project"]]))))
     } else if (measure != "All" & category == "All") {
-      selectInput("project_history", "Select Project", choices = c("All", unique(filter(data_history, Measure == measure)[["Project"]])))
+      selectInput("project_history", "Select Project", choices = c("All", sort(unique(filter(data_history, Measure == measure)[["Project"]]))))
     } else {
-      selectInput("project_history", "Select Project", choices = c("All", unique(filter(data_history, Measure == measure, Category == category)[["Project"]])))
+      selectInput("project_history", "Select Project", choices = c("All", sort(unique(filter(data_history, Measure == measure, Category == category)[["Project"]]))))
     }
   })
 
