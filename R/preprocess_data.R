@@ -7,3 +7,7 @@ data_history <- data_history_raw %>%
     names_to = "Database", values_to = "Variable_names"
   ) %>% 
   arrange(Measure, Project)
+
+
+data_dbpart <- readxl::read_excel("data/Troubleshooting_database.xlsx", sheet = "record", guess_max = 21474836)
+data_harmopart <- readxl::read_excel("data/Troubleshooting_harmonization.xlsx", sheet = "record", guess_max = 21474836)
