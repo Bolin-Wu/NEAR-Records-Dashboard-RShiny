@@ -17,7 +17,7 @@ data_harmopart <- read_excel("data/Troubleshooting_harmonization.xlsx", sheet = 
 source(here("R", "preprocess_harmo_history.R"))
 
 # Get the current date
-last_update_date <- "2024-03-26" # Sys.Date()
+last_update_date <- "2024-04-04" # Sys.Date()
 # Define UI
 ui <- fluidPage(
   title = "NEAR Harmonization Records",
