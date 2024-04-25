@@ -131,7 +131,7 @@ server <- function(input, output, session) {
     
     # Display all descriptions and sources if no variable search is made
     datatable(filtered_data_dbpart,
-              options = list(searching = TRUE, language = list(search = "Search in all columns"), paging = TRUE, ordering = TRUE), escape = FALSE
+              options = list(searching = TRUE, language = list(search = "Search all columns: "), paging = TRUE, ordering = TRUE), escape = FALSE
     )
   })
   # Render harmonization part
@@ -145,7 +145,7 @@ server <- function(input, output, session) {
     
     # Display all descriptions and sources if no variable search is made
     datatable(filtered_data,
-              options = list(searching = TRUE, language = list(search = "Search in all columns"),paging = TRUE, ordering = TRUE), escape = FALSE
+              options = list(searching = TRUE, language = list(search = "Search all columns: "),paging = TRUE, ordering = TRUE), escape = FALSE
     )
   })
   
