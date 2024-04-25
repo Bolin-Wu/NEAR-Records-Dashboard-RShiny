@@ -61,11 +61,11 @@ ui <- fluidPage(
       fluidRow(
         column(
           width = 6,
-          selectInput("database", "Select Database:", choices = c("All", sort(unique(data_dbpart$Database))))
+          selectInput("database", "Select database:", choices = c("All", sort(unique(data_dbpart$Database))))
         ),
         column(
           width = 6,
-          textInput("variable", "Search Variable:", placeholder = "Type to search...")
+          textInput("variable", "Search variable:", placeholder = "Type to search...")
         )
       ),
       column(
@@ -74,7 +74,7 @@ ui <- fluidPage(
       )
     ),
     tabPanel(
-      "Harmoniaztion inquiries",
+      "Harmonization inquiries",
       fluidRow(
         column(
           width = 12,
@@ -84,11 +84,11 @@ ui <- fluidPage(
       fluidRow(
         column(
           width = 6,
-          selectInput("database_harmo", "Select Database:", choices = c("All", sort(unique(data_harmopart$Database))))
+          selectInput("database_harmo", "Select database:", choices = c("All", sort(unique(data_harmopart$Database))))
         ),
         column(
           width = 6,
-          textInput("variable_harmo", "Search Variable:", placeholder = "Type to search...")
+          textInput("variable_harmo", "Search variable:", placeholder = "Type to search...")
         ),
         column(
           width = 12,
@@ -107,7 +107,7 @@ ui <- fluidPage(
       fluidRow(
         column(
           width = 6,
-          selectInput("category_history", "Select Category:", choices = c("All", sort(unique(data_history$Category))))
+          selectInput("category_history", "Select category:", choices = c("All", sort(unique(data_history$Category))))
         ),
         column(
           width = 6,

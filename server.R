@@ -19,9 +19,9 @@ server <- function(input, output, session) {
     
     # If category is All, show all measures, else show measures based on category
     if (category == "All") {
-      selectInput("measure_select_history", "Select Measure", choices = c("All", unique(data_history$Measure)))
+      selectInput("measure_select_history", "Select measure", choices = c("All", unique(data_history$Measure)))
     } else {
-      selectInput("measure_select_history", "Select Measure", choices = c("All", unique(filter(data_history, Category == category)[["Measure"]])))
+      selectInput("measure_select_history", "Select measure", choices = c("All", unique(filter(data_history, Category == category)[["Measure"]])))
     }
   })
   
@@ -32,13 +32,13 @@ server <- function(input, output, session) {
     
     # If category is All, show all measures, else show measures based on category
     if (category == "All" & measure == "All") {
-      selectInput("project_history", "Select Project", choices = c("All", sort(unique(data_history$Project))))
+      selectInput("project_history", "Select project", choices = c("All", sort(unique(data_history$Project))))
     } else if (category != "All" & measure == "All") {
-      selectInput("project_history", "Select Project", choices = c("All", sort(unique(filter(data_history, Category == category)[["Project"]]))))
+      selectInput("project_history", "Select project", choices = c("All", sort(unique(filter(data_history, Category == category)[["Project"]]))))
     } else if (measure != "All" & category == "All") {
-      selectInput("project_history", "Select Project", choices = c("All", sort(unique(filter(data_history, Measure == measure)[["Project"]]))))
+      selectInput("project_history", "Select project", choices = c("All", sort(unique(filter(data_history, Measure == measure)[["Project"]]))))
     } else {
-      selectInput("project_history", "Select Project", choices = c("All", sort(unique(filter(data_history, Measure == measure, Category == category)[["Project"]]))))
+      selectInput("project_history", "Select project", choices = c("All", sort(unique(filter(data_history, Measure == measure, Category == category)[["Project"]]))))
     }
   })
   
