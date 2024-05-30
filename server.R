@@ -13,17 +13,21 @@ source(here("R", "preprocess_data.R"))
 
 # Define server logic
 server <- function(input, output, session) {
+  # the History harmonization tab: make the ui input reactive on other input souce
   # Render Measure select input based on Category selection
   output$measure_ui <- renderUI({
     category <- input$category_history
-    
+
     # If category is All, show all measures, else show measures based on category
     if (category == "All") {
       selectInput("measure_select_history", "Select measure", choices = c("All", unique(data_history$Measure)))
     } else {
       selectInput("measure_select_history", "Select measure", choices = c("All", unique(filter(data_history, Category == category)[["Measure"]])))
     }
-  })
+    
+  }
+  
+)
   
   # Render Project select input based on Category AND Measure selection
   output$project_ui <- renderUI({
@@ -131,7 +135,7 @@ server <- function(input, output, session) {
     
     # Display all descriptions and sources if no variable search is made
     datatable(filtered_data_dbpart,
-              options = list(searching = TRUE, language = list(search = "Search all columns: "), paging = TRUE, ordering = TRUE), escape = FALSE
+              options = list(searching = TRUE, language = list(search = "Search all columns: "), paging = TRUE, ordering = TRUE, pageLength = 25), escape = FALSE
     )
   })
   # Render harmonization part
@@ -145,7 +149,7 @@ server <- function(input, output, session) {
     
     # Display all descriptions and sources if no variable search is made
     datatable(filtered_data,
-              options = list(searching = TRUE, language = list(search = "Search all columns: "),paging = TRUE, ordering = TRUE), escape = FALSE
+              options = list(searching = TRUE, language = list(search = "Search all columns: "),paging = TRUE, ordering = TRUE, pageLength = 25), escape = FALSE
     )
   })
   
