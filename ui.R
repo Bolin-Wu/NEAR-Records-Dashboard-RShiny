@@ -13,7 +13,7 @@ library("markdown")
 source(here("R", "preprocess_data.R"))
 
 # Get the current date
-last_update_date <- "2024-04-25" # Sys.Date()
+last_update_date <- "2024-05-30" # Sys.Date()
 # Define UI
 ui <- fluidPage(
   title = "NEAR Harmonization Records",
