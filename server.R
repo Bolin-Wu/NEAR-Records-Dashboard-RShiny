@@ -13,10 +13,11 @@ source(here("R", "preprocess_data.R"))
 
 # Define server logic
 server <- function(input, output, session) {
-  # the History harmonization tab: make the ui input reactive on other input souce
+  # History harmonization tab: make the ui input reactive on other input i --------
   # Render Measure select input based on Category selection
   output$measure_ui <- renderUI({
     category <- input$category_history
+
 
     # If category is All, show all measures, else show measures based on category
     if (category == "All") {

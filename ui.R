@@ -13,7 +13,7 @@ library("markdown")
 source(here("R", "preprocess_data.R"))
 
 # Get the current date
-last_update_date <- "2024-05-30" # Sys.Date()
+last_update_date <- "2024-06-11" 
 # Define UI
 ui <- fluidPage(
   title = "NEAR Harmonization Records",
@@ -44,7 +44,7 @@ ui <- fluidPage(
           width = 12,
           br(),
           p("Part of history harmonized variables:", style = "text-align: center; font-weight: bold;"),
-          plotOutput("word_cloud"),
+          plotOutput("word_cloud", width = "100%", height = "800px"),
           p("Last update: ", last_update_date)
         )
       )
