@@ -11,9 +11,8 @@ Format Rule:
 * For one project, if a database is not included, the cell is "**NA**". If a database is included but one variable is not available, then the cell is "**\__BLANK\__**".
 
 Reference:
-1. Master file in Linda's project;
-2. R harmonization script;
-3. Master file, harmo rule files and data schema in past projects:
+1. R harmonization script;
+2. Master file, harmo rule files and data schema in past projects:
     * Project nr.01: Health assessment tool, HAT (Xiaonan, Bolin)
     * Project nr.03: Physical function before death (Bolin)
     * Project nr.07: Medications effects on trajectories of biological age (Bolin)
@@ -27,4 +26,4 @@ Don't hesitate to get in touch with Bolin if you have any question.
 
 Initiation date: **2022-09-30**
 
-Last update date:	**2024-05-30**
+Last update date:	**2024-06-25**

@@ -71,7 +71,6 @@ server <- function(input, output, session) {
   )
 
 
-
   # Create bar plot
   output$database_plot <- renderPlot({
     about_plot(data_dbpart, data_harmopart)
