@@ -13,7 +13,7 @@ library("markdown")
 source(here("R", "preprocess_data.R"))
 
 # Get the current date
-last_update_date <- "2025-09-09" 
+last_update_date <- "2025-04-30" 
 # Define UI
 ui <- fluidPage(
   title = "NEAR Harmonization Records",
@@ -106,15 +106,15 @@ ui <- fluidPage(
       ),
       fluidRow(
         column(
-          width = 6,
-          selectInput("category_history", "Select category:", choices = c("All", sort(unique(data_history$Category))))
+          width = 4,
+          uiOutput("category_ui")
         ),
         column(
-          width = 6,
+          width = 4,
           uiOutput("measure_ui")
         ),
         column(
-          width = 6,
+          width = 4,
           uiOutput("project_ui")
         ),
         column(
