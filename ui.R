@@ -106,15 +106,15 @@ ui <- fluidPage(
       ),
       fluidRow(
         column(
-          width = 6,
+          width = 4,
           selectInput("category_history", "Select category:", choices = c("All", sort(unique(data_history$Category))))
         ),
         column(
-          width = 6,
+          width = 4,
           uiOutput("measure_ui")
         ),
         column(
-          width = 6,
+          width = 4,
           uiOutput("project_ui")
         ),
         column(
