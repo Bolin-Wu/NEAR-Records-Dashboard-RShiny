@@ -54,8 +54,6 @@ server <- function(input, output, session) {
   # Validate selections
   validate_selections(session, selections, filtered_data_reactive)
 
-  # Render selected values for debugging
-  render_selected_values(output, selections)
 
   # Render history harmonization part
   render_HistoryProj_table(output, filtered_data_reactive)
