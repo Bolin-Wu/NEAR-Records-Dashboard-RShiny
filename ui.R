@@ -41,12 +41,13 @@ ui <- fluidPage(
           column(
             width = 12,
             br(),
-            plotOutput("database_plot")
+            p("Number of Collected Inquiries", style = "text-align: center; font-weight: bold;"),
+            plotOutput("database_plot", width = "100%", height = "800px")
           ),
           column(
             width = 12,
             br(),
-            p("Part of history harmonized variables:", style = "text-align: center; font-weight: bold;"),
+            p("Part of History Harmonized Variables", style = "text-align: center; font-weight: bold;"),
             plotOutput("word_cloud", width = "100%", height = "800px"),
             p("Last update: ", last_update_date)
           )
