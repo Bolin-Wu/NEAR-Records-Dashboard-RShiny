@@ -13,7 +13,7 @@ library("markdown")
 source(here("R", "preprocess_data.R"))
 
 # Get the current date
-last_update_date <- "2025-05-14" 
+last_update_date <- "2025-05-14"
 # Define UI
 ui <- fluidPage(
   title = "NEAR Harmonization Records",
@@ -26,101 +26,105 @@ ui <- fluidPage(
       style = "display: flex; align-items: center;"
     )
   ),
-  # Define tabs
-  tabsetPanel(
-    tabPanel(
-      "About",
-      fluidRow(
-        column(
-          width = 12,
-          includeMarkdown("text/about.md")
-        ),
-        column(
-          width = 12,
-          br(),
-          plotOutput("database_plot")
-        ),
-        column(
-          width = 12,
-          br(),
-          p("Part of history harmonized variables:", style = "text-align: center; font-weight: bold;"),
-          plotOutput("word_cloud", width = "100%", height = "800px"),
-          p("Last update: ", last_update_date)
-        )
-      )
-    ),
-    tabPanel(
-      "Database inquiries",
-      fluidRow(
-        column(
-          width = 12,
-          includeMarkdown("text/database_tab.md")
+  # Add padding to entire content
+  div(
+    style = "padding-left: 40px; padding-right: 40px;",
+    # Define tabs
+    tabsetPanel(
+      tabPanel(
+        "About",
+        fluidRow(
+          column(
+            width = 12,
+            includeMarkdown("text/about.md")
+          ),
+          column(
+            width = 12,
+            br(),
+            plotOutput("database_plot")
+          ),
+          column(
+            width = 12,
+            br(),
+            p("Part of history harmonized variables:", style = "text-align: center; font-weight: bold;"),
+            plotOutput("word_cloud", width = "100%", height = "800px"),
+            p("Last update: ", last_update_date)
+          )
         )
       ),
-      # verbatimTextOutput("database_info"),
-      fluidRow(
-        column(
-          width = 6,
-          selectInput("database", "Select database:", choices = c("All", sort(unique(data_dbpart$Database))))
+      tabPanel(
+        "Database inquiries",
+        fluidRow(
+          column(
+            width = 12,
+            includeMarkdown("text/database_tab.md")
+          )
+        ),
+        # verbatimTextOutput("database_info"),
+        fluidRow(
+          column(
+            width = 6,
+            selectInput("database", "Select database:", choices = c("All", sort(unique(data_dbpart$Database))))
+          ),
+          column(
+            width = 6,
+            textInput("variable", "Search variable:", placeholder = "Type to search...")
+          )
         ),
         column(
-          width = 6,
-          textInput("variable", "Search variable:", placeholder = "Type to search...")
+          width = 12,
+          DTOutput("dbpart_table")
         )
       ),
-      column(
-        width = 12,
-        DTOutput("dbpart_table")
-      )
-    ),
-    tabPanel(
-      "Harmonization inquiries",
-      fluidRow(
-        column(
-          width = 12,
-          includeMarkdown("text/harmonization_tab.md")
+      tabPanel(
+        "Harmonization inquiries",
+        fluidRow(
+          column(
+            width = 12,
+            includeMarkdown("text/harmonization_tab.md")
+          )
+        ),
+        fluidRow(
+          column(
+            width = 6,
+            selectInput("database_harmo", "Select database:", choices = c("All", sort(unique(data_harmopart$Database))))
+          ),
+          column(
+            width = 6,
+            textInput("variable_harmo", "Search variable:", placeholder = "Type to search...")
+          ),
+          column(
+            width = 12,
+            DTOutput("harmopart_table")
+          )
         )
       ),
-      fluidRow(
-        column(
-          width = 6,
-          selectInput("database_harmo", "Select database:", choices = c("All", sort(unique(data_harmopart$Database))))
+      tabPanel(
+        "History harmonization",
+        fluidRow(
+          column(
+            width = 12,
+            includeMarkdown("text/history_harmonization_tab.md")
+          )
         ),
-        column(
-          width = 6,
-          textInput("variable_harmo", "Search variable:", placeholder = "Type to search...")
-        ),
-        column(
-          width = 12,
-          DTOutput("harmopart_table")
-        )
-      )
-    ),
-    tabPanel(
-      "History harmonization",
-      fluidRow(
-        column(
-          width = 12,
-          includeMarkdown("text/history_harmonization_tab.md")
-        )
-      ),
-      fluidRow(
-        column(
-          width = 4,
-          uiOutput("category_ui")
-        ),
-        column(
-          width = 4,
-          uiOutput("measure_ui")
-        ),
-        column(
-          width = 4,
-          uiOutput("project_ui")
-        ),
-        column(
-          width = 12,
-          # output for rest of the information
-          DTOutput("history_table")
+        fluidRow(
+          column(
+            width = 4,
+            uiOutput("category_ui")
+          ),
+          column(
+            width = 4,
+            uiOutput("measure_ui")
+          ),
+          column(
+            width = 4,
+            uiOutput("project_ui")
+          ),
+          column(
+            width = 12,
+            # output for rest of the information
+            DTOutput("history_table")
+          )
         )
       )
     )
