@@ -5,4 +5,10 @@ Welcome! This web app is designed to complement the information provided by Mael
 We value your feedback and inquiries. Please don’t hesitate to reach out to the maintainer, Bolin Wu: bolin.wu@ki.se, for any suggestions or questions.
 
 
+# Structure of the folder
+- `app.R`: The main R Shiny application file.
+- `data/`: Contains datasets and metadata used in the app.
+- `R/`: Contains R scripts for data processing and visualization.
+- `text/`: Holds text resources and documentation.
+- `README.md`: This file, providing an overview of the project.
 
