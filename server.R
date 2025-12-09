@@ -55,14 +55,13 @@ full_app_ui <- fluidPage(
         "About",
         fluidRow(column(12, includeMarkdown("text/about.md"))),
         fluidRow(column(
-          12, br(),
+          8, br(),
           p("Number of Collected Inquiries",
             style = "text-align: center; font-weight: bold;"
           ),
           plotOutput("database_plot", height = "800px")
-        )),
-        fluidRow(column(
-          12, br(),
+        ),column(
+          4, br(),
           p("Part of History Harmonized Variables",
             style = "text-align: center; font-weight: bold;"
           ),

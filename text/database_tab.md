@@ -1,6 +1,6 @@
 #### Instruction:
 
-Use this tab when you meet problem at the metadata collection phrase. For example, you are communicating with researchers and you want to check if a vaiable is available, but Maelstrom and codebooks are not sufficient.
+Use this tab when you meet problem at the metadata collection phrase. For example, you are communicating with researchers and you want to check if a variable is available, but Maelstrom and codebooks are not sufficient.
 
 Initiation date: **2022-09-30**
 

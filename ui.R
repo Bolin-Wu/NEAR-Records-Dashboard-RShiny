@@ -7,6 +7,7 @@ library(markdown)
 # ==================== THE UI DEFINITION WITH LOGIN ====================
 ui <- fluidPage(
   br(),
+  br(),
   theme = shinytheme("flatly"),
   # Logout button (top-right when logged in)
   div(class = "pull-right", shinyauthr::logoutUI(id = "logout")),
@@ -21,17 +22,18 @@ ui <- fluidPage(
     tags$p(style = "color:#555; font-size:14px;",
            "If you need access, please contact ",
            tags$a(href = "mailto:bolin.wu@ki.se",
-                  "Bolin Wu"
-                  ),
-           "."
+                  "Bolin Wu."
+                  )
     ),
     tags$div(style = "text-align:center; margin-bottom:25px;",
              img(src = "https://www.near-aging.se/wp-content/uploads/2018/09/near-logo-1.png",
                  style = "width:140px; height:auto;",
                  alt = "NEAR Logo")
-    )
+    ),
   )),
   
   # Main app appears here after successful login
-  uiOutput("main_app_ui")
+  uiOutput("main_app_ui"),
+  br(),
+  br()
 )
