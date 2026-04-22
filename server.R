@@ -69,6 +69,10 @@ full_app_ui <- fluidPage(
         ))
       ),
       tabPanel(
+        "Project coordinator checklist",
+        fluidRow(column(12, includeMarkdown("data/projectCoordinator_checkList.md")))
+      ),
+      tabPanel(
         "Database inquiries",
         fluidRow(column(12, includeMarkdown("text/database_tab.md"))),
         fluidRow(
