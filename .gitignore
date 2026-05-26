@@ -55,3 +55,4 @@ rsconnect/
 # Never commit real credentials
 data/near_users.rds
 data/near_users.RData
+.positai

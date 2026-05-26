@@ -13,7 +13,7 @@ ui <- fluidPage(
   div(class = "pull-right", shinyauthr::logoutUI(id = "logout")),
   
   
-  shinyauthr::loginUI(id = "login", title = "Harmonization Records",additional_ui = tagList(
+  shinyauthr::loginUI(id = "login", title = "Harmonization & Inquiry Hub",additional_ui = tagList(
     tags$hr(style = "margin:10px 0; border-color:#eee;"),
     
     tags$p(style = "color:#555; font-size:14px;",

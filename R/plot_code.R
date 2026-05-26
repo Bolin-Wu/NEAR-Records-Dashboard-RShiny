@@ -11,7 +11,7 @@ about_plot <- function(data_dbpart, data_harmopart) {
     geom_text(aes(label = n), vjust = -0.5, size = 6) +
     theme_minimal() +
     labs(x = "Database", y = "Number") +
-    scale_fill_manual(values = c(joycon_pal("Brewster"), joycon_pal("SalmonRun"), joycon_pal("NewHorizons"))) +
+    scale_fill_manual(values = c(joycon_pal("Brewster"), joycon_pal("SalmonRun"), joycon_pal("NewHorizons"),joycon_pal("Hyrule"))) +
     theme(
       axis.text.x = element_text(angle = 45, hjust = 1, size = 12),
       axis.title.y = element_text(size = 14),

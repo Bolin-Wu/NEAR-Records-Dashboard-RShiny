@@ -37,15 +37,15 @@ source(here("R/harmopart_server.R"))
 
 # ==================== THE FULL ORIGINAL UI (defined once) ====================
 full_app_ui <- fluidPage(
-  title = "NEAR Harmonization Records",
+  title = "Harmonization & Inquiry Hub",
   theme = shinytheme("flatly"),
   titlePanel(div(
     style = "display: flex; align-items: center;",
     img(
       src = "https://www.near-aging.se/wp-content/uploads/2018/09/near-logo-1.png",
-      height = 60, style = "margin-right: 10px;"
+      height = 60, style = "margin-right: 10px;margin-left: 40px;"
     ),
-    " Harmonization Records"
+    "Harmonization & Inquiry Hub"
   )),
   div(
     style = "padding-left: 40px; padding-right: 40px;",
@@ -79,7 +79,7 @@ full_app_ui <- fluidPage(
           column(6, selectInput("database", "Select database:",
             choices = c("All", sort(unique(data_dbpart$Database)))
           )),
-          column(6, textInput("variable", "Search variable:", placeholder = "Type to search..."))
+          column(6, textInput("variable", "Search on variable column:", placeholder = "Type to search..."))
         ),
         column(12, DTOutput("dbpart_table"))
       ),
@@ -90,7 +90,7 @@ full_app_ui <- fluidPage(
           column(6, selectInput("database_harmo", "Select database:",
             choices = c("All", sort(unique(data_harmopart$Database)))
           )),
-          column(6, textInput("variable_harmo", "Search variable:", placeholder = "Type to search..."))
+          column(6, textInput("variable_harmo", "Search on variable column:", placeholder = "Type to search..."))
         ),
         column(12, DTOutput("harmopart_table"))
       ),

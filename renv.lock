@@ -739,6 +739,27 @@
       ],
       "Hash": "ac107251d9d9fd72f0ca8049988f1d7f"
     },
+    "httr2": {
+      "Package": "httr2",
+      "Version": "1.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "R6",
+        "cli",
+        "curl",
+        "glue",
+        "lifecycle",
+        "magrittr",
+        "openssl",
+        "rappdirs",
+        "rlang",
+        "vctrs",
+        "withr"
+      ],
+      "Hash": "c20959a9442c0e3adb1e8d3809c5d1f7"
+    },
     "ids": {
       "Package": "ids",
       "Version": "1.0.1",
@@ -1234,7 +1255,7 @@
     },
     "rsconnect": {
       "Package": "rsconnect",
-      "Version": "1.5.1",
+      "Version": "1.8.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1243,6 +1264,7 @@
         "cli",
         "curl",
         "digest",
+        "httr2",
         "jsonlite",
         "lifecycle",
         "openssl",
@@ -1255,14 +1277,14 @@
         "utils",
         "yaml"
       ],
-      "Hash": "17c9ca8fc7fa2d49fd5ba6f4b3ad2b76"
+      "Hash": "4e531f62ba72657712f59383e58209c9"
     },
     "rstudioapi": {
       "Package": "rstudioapi",
-      "Version": "0.17.1",
+      "Version": "0.18.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "5f90cd73946d706cfe26024294236113"
+      "Hash": "d6e1ecf8e39b6d53c8acde372b2f92d1"
     },
     "rvest": {
       "Package": "rvest",
