@@ -78,8 +78,7 @@ full_app_ui <- fluidPage(
         fluidRow(
           column(6, selectInput("database", "Select database:",
             choices = c("All", sort(unique(data_dbpart$Database)))
-          )),
-          column(6, textInput("variable", "Search on variable column:", placeholder = "Type to search..."))
+          ))
         ),
         column(12, DTOutput("dbpart_table"))
       ),
@@ -134,7 +133,7 @@ server <- function(input, output, session) {
   # ---- All the original server logic (unchanged) ----
   # Database tab: Reactive expression to filter data based on database and variable search
   filtered_data_dbpart <- reactive({
-    filterData(data_dbpart, input$database, input$variable)
+    filterData(data_dbpart, input$database)
   })
 
   # Render database part

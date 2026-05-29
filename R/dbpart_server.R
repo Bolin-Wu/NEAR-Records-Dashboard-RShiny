@@ -1,5 +1,5 @@
 # Function to filter data based on database and variable search
-filterData <- function(data, database, variable) {
+filterData <- function(data, database) {
   req(database)
 
   # Filter by database
@@ -7,14 +7,7 @@ filterData <- function(data, database, variable) {
     filtered <- data
   } else {
     filtered <- data %>%
-      filter(Database == database) %>%
-      select(-1)
-  }
-
-  # If variable search is not empty, filter by variable
-  if (variable != "") {
-    filtered <- filtered %>%
-      filter(str_detect(tolower(Variable), tolower(variable)))
+      filter(Database == database)
   }
 
   return(filtered)

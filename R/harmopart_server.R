@@ -9,8 +9,7 @@ filterHarmonizationData <- function(data, database, variable) {
     filtered <- data
   } else {
     filtered <- data %>%
-      filter(Database == database) %>%
-      select(-1)
+      filter(Database == database)
   }
 
   # If variable search is not empty, filter by variable
