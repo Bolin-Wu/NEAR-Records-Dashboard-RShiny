@@ -18,6 +18,9 @@ filterHarmonizationData <- function(data, database, variable) {
       filter(str_detect(tolower(Variable), tolower(variable)))
   }
 
+  filtered = filtered |> 
+    arrange(Variable)
+
   return(filtered)
 }
 

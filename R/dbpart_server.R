@@ -9,6 +9,9 @@ filterData <- function(data, database) {
     filtered <- data %>%
       filter(Database == database)
   }
+  
+  filtered = filtered |> 
+    arrange(Variable)
 
   return(filtered)
 }
